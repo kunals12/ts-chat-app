@@ -74,7 +74,9 @@ wss.on("connection", (socket: WebSocket) => {
         if (roomMembers) {
             // Iterate over each socket in the room and send the message
             roomMembers.forEach((user: WebSocket) => {
+              if (user !== socket) {
                 user.send(message.toString());
+            }
             });
         } else {
             console.log(`Room ${roomId} does not exist or has no members.`);
